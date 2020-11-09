@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1117460747175157384}
   - component: {fileID: 5615353102438234805}
   - component: {fileID: -4701874719539244382}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RingBig_Active
   m_TagString: Ring
   m_Icon: {fileID: 0}
@@ -86,7 +86,7 @@ GameObject:
   - component: {fileID: 1117460748064141002}
   - component: {fileID: 1117460748064141001}
   - component: {fileID: 1684308753778294140}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ring_big_top@3x
   m_TagString: RingEdge
   m_Icon: {fileID: 0}
@@ -185,7 +185,7 @@ GameObject:
   - component: {fileID: 1117460748693667169}
   - component: {fileID: 1117460748693667168}
   - component: {fileID: 3740677074669128270}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ring_big_bottom@3x
   m_TagString: RingEdge
   m_Icon: {fileID: 0}

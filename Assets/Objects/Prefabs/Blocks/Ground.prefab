@@ -11,6 +11,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GroundPlace
       objectReference: {fileID: 0}
+    - target: {fileID: 2566412223052537501, guid: 01a621b49235c8644a5b07d9219f6efb, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 2578124641533458230, guid: 01a621b49235c8644a5b07d9219f6efb, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1

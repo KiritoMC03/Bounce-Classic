@@ -1,17 +1,21 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 using static Utils;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class Player : MonoBehaviour
 {
+    public UnityEvent OnPlayerDead;
+
     private Rigidbody2D _rigidbody;
+    private Transform _spawnPosition;
     [SerializeField] private float _baseSpeed = 1f;
     [SerializeField] private float _baseJumpForce = 1f;
     private float _speed;
     private float _jumpForce;
     private bool isGrounded = false;
-
     private bool _isJump = false;
 
     void Start()
@@ -41,7 +45,6 @@ public class Player : MonoBehaviour
         if (_isJump && isGrounded)
         {
             Jump();
-            Debug.Log("Jump!");
         }
     }
 
@@ -61,7 +64,7 @@ public class Player : MonoBehaviour
         }
         _rigidbody.velocity = booferVelocity;
     }
-
+    
     private void Jump()
     {
         var offset = new Vector2(0, _jumpForce * 2);
@@ -73,11 +76,29 @@ public class Player : MonoBehaviour
         _rigidbody.AddRelativeForce(offset);
     }
 
+    public void Respawn()
+    {
+        _spawnPosition = GameObject.FindGameObjectWithTag("Respawn").transform;
+
+        if (_spawnPosition != null)
+        {
+            var newPlayer = Instantiate(gameObject);
+            newPlayer.transform.position = _spawnPosition.transform.position;
+
+            Destroy(gameObject);
+        }
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.transform.tag == "Ground" || collision.transform.tag == "RingEdge")
         {
             isGrounded = true;
+        }
+
+        if(collision.transform.tag == "Thorn")
+        {
+            Respawn();
         }
     }
     private void OnCollisionExit2D(Collision2D collision)
