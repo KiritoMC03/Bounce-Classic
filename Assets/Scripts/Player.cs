@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using static Utils;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -23,6 +24,12 @@ public class Player : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody2D>();
         _speed = _baseSpeed * 0.12f;
         _jumpForce = _baseJumpForce * 2.4f;
+    }
+
+    private void Awake()
+    {
+        _spawnPosition = GameObject.FindGameObjectWithTag("Respawn").transform;
+        transform.position = _spawnPosition.position;
     }
 
     void Update()
@@ -89,6 +96,21 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void Died()
+    {
+        //ToDo: сделать нормальную механику;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.transform.tag == "Life")
+        {
+            LifeCountManager.ChangeCountTo(1);
+            Destroy(collision.gameObject);
+        }
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.transform.tag == "Ground" || collision.transform.tag == "RingEdge")
@@ -98,7 +120,19 @@ public class Player : MonoBehaviour
 
         if(collision.transform.tag == "Thorn")
         {
-            Respawn();
+            if(LifeCountManager.GetCount() > 1)
+            {
+                LifeCountManager.ChangeCountTo(-1);
+                OnPlayerDead?.Invoke();
+                Respawn();
+                return;
+            }
+            else
+            {
+                OnPlayerDead?.Invoke();
+                Died();
+                return;
+            }
         }
     }
     private void OnCollisionExit2D(Collision2D collision)

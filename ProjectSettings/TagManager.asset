@@ -8,6 +8,7 @@ TagManager:
   - Ring
   - RingEdge
   - Thorn
+  - Life
   layers:
   - Default
   - TransparentFX

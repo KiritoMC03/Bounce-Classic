@@ -147,8 +147,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OnPlayerDead:
     m_PersistentCalls:
-      m_Calls: []
-  _spawnPosition: {fileID: 6839449894057614996, guid: fe18fe8c6a6048b4aa4972d19c1d200b, type: 3}
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: PopController, Assembly-CSharp
+        m_MethodName: ShowPop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _baseSpeed: 60
   _baseJumpForce: 0.6
 --- !u!50 &7569788603231356050
