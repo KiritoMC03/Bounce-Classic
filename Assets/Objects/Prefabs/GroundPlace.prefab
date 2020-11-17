@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2578124641533458230}
   - component: {fileID: 8919692408319186350}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GroundPlace
   m_TagString: Ground
   m_Icon: {fileID: 2488908585195742037, guid: 0000000000000000d000000000000000, type: 0}
@@ -55,5 +55,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.01}
+  m_Size: {x: 1.8, y: 0.01}
   m_EdgeRadius: 0

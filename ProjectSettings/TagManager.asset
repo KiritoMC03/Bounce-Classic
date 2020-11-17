@@ -9,6 +9,11 @@ TagManager:
   - RingEdge
   - Thorn
   - Life
+  - Deflater
+  - Pumper
+  - BallSmall
+  - BallBig
+  - Pop
   layers:
   - Default
   - TransparentFX

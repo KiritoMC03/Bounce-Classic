@@ -14,22 +14,26 @@ public class Player : MonoBehaviour
     private Transform _spawnPosition;
     [SerializeField] private float _baseSpeed = 1f;
     [SerializeField] private float _baseJumpForce = 1f;
+    [SerializeField] private float _bySizeJumpModifier = 1.16f;
     private float _speed;
     private float _jumpForce;
     private bool isGrounded = false;
     private bool _isJump = false;
+    [SerializeField] private bool _isSmall = true;
+    [SerializeField] private GameObject _smallBallSprite;
+    [SerializeField] private GameObject _bigBallSprite;
 
-    void Start()
-    {
-        _rigidbody = GetComponent<Rigidbody2D>();
-        _speed = _baseSpeed * 0.12f;
-        _jumpForce = _baseJumpForce * 2.4f;
-    }
+    private bool _allInitializate = false;
 
     private void Awake()
     {
-        _spawnPosition = GameObject.FindGameObjectWithTag("Respawn").transform;
-        transform.position = _spawnPosition.position;
+        _speed = _baseSpeed * 7.2f /*0.12f*/;
+        _jumpForce = _baseJumpForce * 1.44f /*2.4f*/;
+    }
+
+    void Start()
+    {
+        SetStartedParams();
     }
 
     void Update()
@@ -53,6 +57,15 @@ public class Player : MonoBehaviour
         {
             Jump();
         }
+    }
+
+    private void SetStartedParams()
+    {
+        _rigidbody = GetComponent<Rigidbody2D>();
+        _spawnPosition = GameObject.FindGameObjectWithTag("Respawn").transform;
+        transform.position = _spawnPosition.position;
+
+        ChangeSize(_isSmall, false);
     }
 
     private void Move()
@@ -99,7 +112,35 @@ public class Player : MonoBehaviour
     public void Died()
     {
         //ToDo: сделать нормальную механику;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        Debug.Log(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void ChangeSize(bool toSmall, bool changeJumpForce = false)
+    {
+        // ToDo: оптимизировать через класс объекта?
+        if (toSmall)
+        {
+            _bigBallSprite.SetActive(false);
+            _smallBallSprite.SetActive(true);
+            _isSmall = true; // Не выноси это за условный блок.
+        }
+        else
+        {
+            _smallBallSprite.SetActive(false);
+            _bigBallSprite.SetActive(true);
+            _isSmall = false; // Аналогично.
+        }
+
+        if (toSmall && changeJumpForce)
+        {
+            _jumpForce /= _bySizeJumpModifier;
+            return;
+        }
+        else if(!toSmall && changeJumpForce)
+        {
+            _jumpForce *= _bySizeJumpModifier;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -133,6 +174,15 @@ public class Player : MonoBehaviour
                 Died();
                 return;
             }
+        }
+
+        if(collision.transform.tag == "Pumper" && _isSmall)
+        {
+            ChangeSize(false, true);
+        }
+        else if (collision.transform.tag == "Deflater" && !_isSmall)
+        {
+            ChangeSize(true, true);
         }
     }
     private void OnCollisionExit2D(Collision2D collision)

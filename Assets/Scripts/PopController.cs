@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PopController : MonoBehaviour
 {
+    /*
     private Transform _player;
 
     void Start()
@@ -20,7 +21,6 @@ public class PopController : MonoBehaviour
 
     IEnumerator PopShower()
     {
-        Debug.Log("1 " + _player == null);
         if(_player == null)
         {
             yield return new WaitForSeconds(1);
@@ -32,5 +32,5 @@ public class PopController : MonoBehaviour
         yield return new WaitForSecondsRealtime(1);
         Time.timeScale = 1;
         gameObject.SetActive(false);
-    }
+    }*/
 }
