@@ -266,6 +266,7 @@ MonoBehaviour:
   _isSmall: 1
   _smallBallSprite: {fileID: 7569788602967910007}
   _bigBallSprite: {fileID: 3252699068835724005}
+  _gameManager: {fileID: 4123794126594567506, guid: edf93d1b237dac14f812560678457506, type: 3}
 --- !u!50 &7569788603231356050
 Rigidbody2D:
   serializedVersion: 4

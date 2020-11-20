@@ -1,10 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Collider2D))]
 public class Ring : MonoBehaviour
 {
+    public UnityEvent OnRingEnter;
+
     [SerializeField] private GameObject _inactiveRing;
     [SerializeField] private Transform _rings;
     [SerializeField] private bool _needRotate = false;
@@ -23,6 +26,9 @@ public class Ring : MonoBehaviour
                 }
 
                 Destroy(gameObject);
+
+                Debug.Log("A!");
+                OnRingEnter?.Invoke();
             }
         }
     }

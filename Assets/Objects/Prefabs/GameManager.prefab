@@ -43,6 +43,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8a7a5f4136f8b841a3cf099c236894d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _player: {fileID: 7569788603231356053, guid: 46a2ef990bd60ca4798f953bea15ed57, type: 3}
-  _playZone: {fileID: 5004566898396946650, guid: ca95c6bde70e66a4694cc4e42c46834a, type: 3}
-  _spawnPosition: {fileID: 6839449894057614996, guid: fe18fe8c6a6048b4aa4972d19c1d200b, type: 3}
+  isStartingSizeSmall: 1
+  _ringCounter: {fileID: 0}
+  _ringImage: {fileID: 7870403944531782033, guid: be314f42d65b75746bb8abf8e5fb513e, type: 3}

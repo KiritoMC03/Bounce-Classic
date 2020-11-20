@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 2090385043485460819}
   - component: {fileID: 2800060482998134138}
   - component: {fileID: 1111638973859410542}
+  - component: {fileID: -7488505366339728233}
+  - component: {fileID: 1222287868}
   m_Layer: 8
   m_Name: Portal
   m_TagString: Untagged
@@ -72,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 595910363
   m_SortingLayer: 2
   m_SortingOrder: 5
-  m_Sprite: {fileID: 3339368599638299501, guid: 2b8e56172556b384090133a6f98ab8e2, type: 3}
+  m_Sprite: {fileID: -3329788551277368390, guid: 2b8e56172556b384090133a6f98ab8e2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -109,3 +111,34 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.5, y: 2}
   m_EdgeRadius: 0
+--- !u!114 &-7488505366339728233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8957190014222918753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd0855df8b70b524980aaaeb3b0ab47a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!95 &1222287868
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8957190014222918753}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ee67870e9bc855a4d8bbbafd0d937a54, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

@@ -72,6 +72,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91527d287b24b5848bac29ee995d99a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnRingEnter:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4123794126594567504, guid: edf93d1b237dac14f812560678457506, type: 3}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: AddRingToScore
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _inactiveRing: {fileID: 2408252421235269458, guid: 1d4cceba19d23e84599d4c480f98e7f7, type: 3}
   _rings: {fileID: 7844512966313933354, guid: baee101c2eebe224bbcda5141d143e0c, type: 3}
   _needRotate: 0

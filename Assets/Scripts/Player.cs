@@ -22,6 +22,7 @@ public class Player : MonoBehaviour
     [SerializeField] private bool _isSmall = true;
     [SerializeField] private GameObject _smallBallSprite;
     [SerializeField] private GameObject _bigBallSprite;
+    [SerializeField] private GameObject _gameManager;
 
     private bool _allInitializate = false;
 
@@ -65,7 +66,10 @@ public class Player : MonoBehaviour
         _spawnPosition = GameObject.FindGameObjectWithTag("Respawn").transform;
         transform.position = _spawnPosition.position;
 
-        ChangeSize(_isSmall, false);
+        if(_gameManager != null)
+        {
+            ChangeSize(_gameManager.GetComponent<GameManager>().GetIsStartingSizeSmall(), false);
+        }
     }
 
     private void Move()
@@ -100,12 +104,28 @@ public class Player : MonoBehaviour
     {
         _spawnPosition = GameObject.FindGameObjectWithTag("Respawn").transform;
 
+        gameObject.SetActive(false);
+
         if (_spawnPosition != null)
         {
-            var newPlayer = Instantiate(gameObject);
-            newPlayer.transform.position = _spawnPosition.transform.position;
+            transform.position = _spawnPosition.transform.position;
 
-            Destroy(gameObject);
+            if (_gameManager != null)
+            {
+                var isStartingSizeSmall = _gameManager.GetComponent<GameManager>().GetIsStartingSizeSmall();
+
+                if (isStartingSizeSmall)
+                {
+                    ChangeSize(true, false);
+                }
+                else if (isStartingSizeSmall == false)
+                {
+                    ChangeSize(false, true);
+                }
+
+                new WaitForSeconds(_gameManager.GetComponent<GameManager>()._popShowTime);
+                gameObject.SetActive(true);
+            }
         }
     }
 
