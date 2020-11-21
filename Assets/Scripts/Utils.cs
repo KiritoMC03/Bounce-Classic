@@ -131,7 +131,10 @@ static public class Utils
     {
         foreach (var elem in elems)
         {
-            elem.SetActive(true);
+            if(elem != null)
+            {
+                elem.SetActive(true);
+            }
         }
     }
 
@@ -143,7 +146,10 @@ static public class Utils
     {
         foreach (var elem in elems)
         {
-            elem.SetActive(false);
+            if (elem != null)
+            {
+                elem.SetActive(false);
+            }
         }
     }
 
@@ -155,14 +161,26 @@ static public class Utils
     {
         foreach (var elem in elems)
         {
-            if (elem.activeInHierarchy)
+            if (elem != null)
             {
-                elem.SetActive(false);
-            }
-            else
-            {
-                elem.SetActive(true);
+                if (elem.activeInHierarchy)
+                {
+                    elem.SetActive(false);
+                }
+                else
+                {
+                    elem.SetActive(true);
+                }
             }
         }
+    }
+
+    static internal void ChangeLocalScaleTo(GameObject gameObject , float x, float y, float z)
+    {
+        var tempScale = gameObject.transform.localScale;
+        tempScale.x = x;
+        tempScale.x = y;
+        tempScale.x = z;
+        gameObject.transform.localScale = tempScale;
     }
 }

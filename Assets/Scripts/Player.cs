@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
@@ -23,6 +24,7 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject _smallBallSprite;
     [SerializeField] private GameObject _bigBallSprite;
     [SerializeField] private GameObject _gameManager;
+    [SerializeField] private GameObject _popController;
 
     private bool _allInitializate = false;
 
@@ -102,9 +104,14 @@ public class Player : MonoBehaviour
 
     public void Respawn()
     {
+        StopCoroutine(Respawner());
+
         _spawnPosition = GameObject.FindGameObjectWithTag("Respawn").transform;
 
-        gameObject.SetActive(false);
+        //ChangeLocalScaleTo(gameObject, 0);
+        var tempScale = gameObject.transform.localScale;
+        tempScale.x = 0;
+        gameObject.transform.localScale = tempScale;
 
         if (_spawnPosition != null)
         {
@@ -123,16 +130,32 @@ public class Player : MonoBehaviour
                     ChangeSize(false, true);
                 }
 
-                new WaitForSeconds(_gameManager.GetComponent<GameManager>()._popShowTime);
-                gameObject.SetActive(true);
+
+                if (_popController != null)
+                {
+                    StartCoroutine(Respawner());
+                }
             }
         }
+    }
+
+    IEnumerator Respawner()
+    {
+        yield return new WaitForSecondsRealtime(_popController.GetComponent<PopController>()._popShowTime);
+
+        //ChangeLocalScaleTo(gameObject, 1);
+
+
+        var tempScale = gameObject.transform.localScale;
+        tempScale.x = 1;
+        gameObject.transform.localScale = tempScale;
+
+        StopCoroutine(Respawner());
     }
 
     public void Died()
     {
         //ToDo: сделать нормальную механику;
-        Debug.Log(SceneManager.GetActiveScene().buildIndex);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
@@ -170,11 +193,16 @@ public class Player : MonoBehaviour
             LifeCountManager.ChangeCountTo(1);
             Destroy(collision.gameObject);
         }
+
+        if(collision.transform.tag == "Portal")
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.transform.tag == "Ground" || collision.transform.tag == "RingEdge")
+        if(collision.transform.tag == "Ground" || collision.transform.tag == "RingEdge" || collision.transform.tag == "Deflater")
         {
             isGrounded = true;
         }

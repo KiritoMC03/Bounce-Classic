@@ -23,7 +23,6 @@ public class LifeCountManager : MonoBehaviour
     static internal void ChangeCountTo(int count)
     {
         _lifeCount += count;
-        Debug.Log(_lifeCount);
     }
 
     static internal int GetCount()

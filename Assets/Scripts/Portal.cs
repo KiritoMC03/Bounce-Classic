@@ -6,6 +6,7 @@ public class Portal : MonoBehaviour
 {
     private Animator _animator;
     private Collider2D _collider;
+    [SerializeField] private GameObject _border;
 
     private void Start()
     {
@@ -14,7 +15,6 @@ public class Portal : MonoBehaviour
 
         if (_collider != null)
         {
-            Debug.Log("!");
             _collider.enabled = false;
         }
     }
@@ -23,5 +23,10 @@ public class Portal : MonoBehaviour
     {
         _animator.SetBool("RingsEnded", true);
         _collider.enabled = true;
+        
+        if(_border != null)
+        {
+            Destroy(_border);
+        }
     }
 }

@@ -27,7 +27,6 @@ public class Ring : MonoBehaviour
 
                 Destroy(gameObject);
 
-                Debug.Log("A!");
                 OnRingEnter?.Invoke();
             }
         }

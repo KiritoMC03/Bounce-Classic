@@ -4,33 +4,45 @@ using UnityEngine;
 
 public class PopController : MonoBehaviour
 {
-    /*
-    private Transform _player;
+    private GameObject _player;
+    [SerializeField] private GameObject _pop;
+    internal float _popShowTime = 1f;
 
-    void Start()
+
+    private void Start()
     {
-        gameObject.SetActive(false);
+        _player = GameObject.FindGameObjectWithTag("Player");
+        transform.Translate(0, 100f, 0);
     }
 
     public void ShowPop()
     {
-        gameObject.SetActive(true);
-        _player = GameObject.FindGameObjectWithTag("Player").transform;
-        StartCoroutine(PopShower());
+        if (_player == null)
+        {
+            _player = GameObject.FindGameObjectWithTag("Player");
+        }
+
+        if (_player != null)
+        {
+            StartCoroutine(PopShower());
+        }
     }
 
     IEnumerator PopShower()
     {
-        if(_player == null)
+        Time.timeScale = 0;
+        if (_player == null)
         {
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(_popShowTime);
             StopCoroutine(PopShower());
         }
 
-        transform.position = _player.position;
-        Time.timeScale = 0;
-        yield return new WaitForSecondsRealtime(1);
-        Time.timeScale = 1;
-        gameObject.SetActive(false);
-    }*/
+        if(_pop != null)
+        {
+            _pop.transform.position = _player.transform.position;
+            yield return new WaitForSecondsRealtime(_popShowTime);
+            Time.timeScale = 1;
+            _pop.transform.Translate(0, 100f, 0);
+        }
+    }
 }
